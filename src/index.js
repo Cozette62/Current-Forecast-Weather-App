@@ -47,8 +47,36 @@ function handleSearchSubmit(event) {
   let searchInput = document.querySelector("#search-form-input");
   searchCity(searchInput.value);
 }
+function getforecast(city) {
+  let apiKey = "1730e2a9b8853t39f40ob3d474fe90da";
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+  console.log(apiUrl);
+}
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
 
+  let days = ["Tue", "Wed", "Thu", "Fri", "Sat"];
+  let forecastHtml = "";
+
+  days.forEach(function (day) {
+    forecastHtml =
+      forecastHtml +
+      `
+  <div class="weather-forecast-day">
+  <div class="weather-forecast-date">${day}</div>
+  <div class="weather-forecast-icon">⛅</div>
+  <div class="weather-forecast-temperature">
+  <strong>15</strong> </div> 
+  <div class="weather-forecast-temperature">9</div>
+  </div>
+  </div>
+  `;
+  });
+
+  forecastElement.innerHTML = forecastHtml;
+}
 let searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit", handleSearchSubmit);
 
 searchCity("Paris");
+displayForecast();

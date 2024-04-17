@@ -52,7 +52,7 @@ main {
 .weather-app-details strong {
   color: #885df1;
 }
-.current-weather-container {
+.current-weather {
   display: flex;
 }
 .icon {
@@ -68,9 +68,9 @@ main {
   margin-top: 16px;
   font-size: 28px;
 }
-.weather-forecast-container {
+.weather-forecast {
   margin-top: 20px;
-  text-align: center;
+  text-align: left;
 }
 .weather-forecast-day {
   font-size: 16px;
@@ -79,7 +79,7 @@ main {
 .weather-forecast-temperatures {
   font-size: 13px;
 }
-.weather-temp-min {
+.weather-forecast-temperature {
   opacity: 0.5;
 }
 
