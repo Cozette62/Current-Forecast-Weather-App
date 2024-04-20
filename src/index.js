@@ -16,6 +16,8 @@ function displayTemperature(response) {
   windSpeedElement.innerHTML = `${response.data.wind.speed}km/h`;
   temperatureElement.innerHTML = Math.round(temperature);
   iconElement.innerHTML = `<img src="${response.data.condition.icon_url}" class="weather-app-icon" />`;
+
+  getForecast(response.data.city);
 }
 
 function searchCity(city) {
@@ -53,24 +55,31 @@ function getForecast(city) {
   axios.get(apiUrl).then(displayForecast);
 }
 
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  return days[day];
+}
+
 function displayForecast(response) {
   console.log(response.data);
   let forecastHtml = "";
 
-  days.forEach(function (day) {
+  let days;
+
+  response.data.daily.forEach(function (day) {
     forecastHtml =
       forecastHtml +
       `
     <div class="weather-forecast-day">
-    <div class="weather-forecast-date">${day}</div>
-    <div class="weather-forecast-icon">⛅</div>
-    <div class="weather-forecast-temperature">
-    <strong>15</strong> </div> 
-    <div class="weather-forecast-temperature">9</div>
-    </div>
+      <div class="weather-forecast-date">${formatDay(day.time)}</div>
+      <div class="weather-forecast-icon">⛅</div>
+      <div class="weather-forecast-temperature">
+        <strong>15</strong> 9
+      </div>
     </div>
     `;
-    let days = ["Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
   });
 
   let forecastElement = document.querySelector("#forecast");
@@ -80,5 +89,3 @@ let searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit", handleSearchSubmit);
 
 searchCity("Paris");
-getForecast("Paris");
-displayForecast();
